@@ -4,6 +4,16 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+body{
+    background-color: rgb(18, 18, 18);
+}
+
+#image {
+    margin-top: 2.5%;
+    display: flex;
+    justify-content: center;
+}
+
 h1:focus {
     outline: none;
 }
