@@ -8,13 +8,9 @@ body{
     background-color: rgb(18, 18, 18);
 }
 
-#image, #boton {
+#image {
     display: flex;
     justify-content: center;
-}
-
-#boton {
-    margin-top: 3%;
 }
 
 button{
