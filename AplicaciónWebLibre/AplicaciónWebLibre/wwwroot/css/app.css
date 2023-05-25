@@ -8,10 +8,17 @@ body{
     background-color: rgb(18, 18, 18);
 }
 
-#image {
-    margin-top: 2.5%;
+#image, #boton {
     display: flex;
     justify-content: center;
+}
+
+#boton {
+    margin-top: 3%;
+}
+
+button{
+    margin: auto;
 }
 
 h1:focus {
