@@ -9,32 +9,17 @@
 		<div id="image">
 			<a href=""><img width="400px" src="./images/hp.png" id="logo" /></a>
 		</div>
-		<div id="boton">
-			<button @onclick="GetInfo">Get Info</button>
-		</div>
 	</div>
 </body>
 
 @code{
 	private IJSInProcessObjectReference module;
 
-	//protected override async Task OnAfterRenderAsync(bool firstRender)
-	//{
-	//	if (firstRender)
-	//	{
-	//		await JSRuntime.InvokeVoidAsync("executeOnloadMethod");
-	//	}
-	//}
-
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
 
 		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
-	}
-
-	public async void GetInfo()
-	{
 		GetHpCharacters();
 	}
 
