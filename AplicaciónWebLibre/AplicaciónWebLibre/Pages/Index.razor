@@ -1,9 +1,34 @@
 ﻿@page "/"
+@*@using System.Text.RegularExpressions;*@
+@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
 
 <PageTitle>JA Music</PageTitle>
-
-<div id="all">
-	<div id="image">
-		<img src="./images/logo.png" id="logo"/>
+<body>
+	<div id="all">
+		<div id="image">
+			<a href=""><img src="./images/logo.png" id="logo" /></a>
+		</div>
+		<div>
+			<button @onclick="All">Get Albums</button>
+		</div>
 	</div>
-</div>
+</body>
+
+@code{
+	private IJSInProcessObjectReference module;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
+	}
+
+	public async void All()
+	{
+		GetAlbums();
+	}
+
+	private async Task GetAlbums() => await module.InvokeVoidAsync("getAlbums");
+}
