@@ -5,7 +5,7 @@
 
 <PageTitle>JuanmaAlvarry Potter</PageTitle>
 <body>
-	<div>
+	<div id="all">
 		<div id="image">
 			<a href=""><img width="400px" src="./images/hp-black.png"/></a>
 		</div>
@@ -34,15 +34,5 @@
 </body>
 
 @code{
-	private IJSInProcessObjectReference module;
-
-	protected override async Task OnInitializedAsync()
-	{
-		await base.OnInitializedAsync();
-
-		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
-		GetHpCharacters();
-	}
-
-	private async Task GetHpCharacters() => await module.InvokeVoidAsync("getHpCharacters");
+	
 }

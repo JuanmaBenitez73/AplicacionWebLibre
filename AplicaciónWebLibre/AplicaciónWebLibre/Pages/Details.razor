@@ -1,13 +1,17 @@
 ﻿@page "/details"
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop;
+@inject IJSRuntime JSRuntime
 
 <PageTitle>JuanmaAlvarry Potter</PageTitle>
-<body>
-	<div id="details">
+<body id="details">
+	<div>
 		<div id="image">
 			<a href=""><img width="400px" src="./images/hp-black.png" /></a>
 		</div>
-		<div>
-
+		<div id="all">
+			<div id="container">
+			</div>
 		</div>
 		<div style="display: flex; justify-content: center; margin-top: 7rem; padding-top: 1rem; padding-bottom: 1rem; color: white; background-color: rgb(50, 50, 50);">
 			Página sobre muestreo de datos de Harry Potter - Información obtenida de la API oficial de Harry Potter: <a href="https://hp-api.onrender.com/api/characters" style="text-decoration: none; color: white;"><b>https://hp-api.onrender.com/api/characters</b></a>
@@ -16,5 +20,15 @@
 </body>
 
 @code {
+	private IJSInProcessObjectReference module;
 
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
+		GetHpCharacters();
+	}
+
+	private async Task GetHpCharacters() => await module.InvokeVoidAsync("getHpCharacters");
 }
