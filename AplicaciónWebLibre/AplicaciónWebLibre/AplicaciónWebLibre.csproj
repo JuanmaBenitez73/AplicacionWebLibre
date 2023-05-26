@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\vdeo\**" />
+    <Content Remove="wwwroot\vdeo\**" />
+    <EmbeddedResource Remove="wwwroot\vdeo\**" />
+    <None Remove="wwwroot\vdeo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\Counter.razor" />
     <Content Remove="Pages\FetchData.razor" />
     <Content Remove="Shared\NavMenu.razor" />
@@ -24,10 +31,6 @@
 
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\vdeo\" />
   </ItemGroup>
 
 </Project>
