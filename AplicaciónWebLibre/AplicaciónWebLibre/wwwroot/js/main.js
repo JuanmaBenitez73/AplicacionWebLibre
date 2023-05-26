@@ -1,4 +1,82 @@
 ﻿var URL = "https://hp-api.onrender.com/api/characters";
+var URLGryffindor = "https://hp-api.onrender.com/api/characters/house/gryffindor";
+var URLSlytherine = "https://hp-api.onrender.com/api/characters/house/slytherine";
+var URLRavenclaw = "https://hp-api.onrender.com/api/characters/house/ravenclaw";
+var URLHufflepuff = "https://hp-api.onrender.com/api/characters/house/hufflepuff";
+
+var gryffindorCharacters = [];
+var slytherineCharacters = [];
+var ravenclawCharacters = [];
+var hufflepuffCharacters = [];
+
+export async function getHpCharacters() {
+    for (var i = 0; i < 25; i++) {
+        var request = await fetch(URL);
+        var data = await request.json();
+        viewCharacters(data[i]);
+        console.log(data[i]);
+    }
+}
+
+export async function getGryffindor() {
+    var request = await fetch(URLGryffindor);
+    var data = await request.json();
+    gryffindorCharacters.push(data);
+    console.log(gryffindorCharacters);
+    for (var i = 0; i < 25; i++) {
+        var request2 = await fetch(URL);
+        var data2 = await request2.json();
+        if (gryffindorCharacters[0][i].id == data2[i].id) {
+            viewCharacters(data2[i]);
+            console.log(data2[i]);
+        }
+    }
+}
+
+export async function getSlytherine() {
+    var request = await fetch(URLSlytherine);
+    var data = await request.json();
+    slytherineCharacters.push(data);
+    console.log(slytherineCharacters);
+    for (var i = 0; i < 25; i++) {
+        var request2 = await fetch(URL);
+        var data2 = await request2.json();
+        if (slytherineCharacters[0][i].id == data2[i].id) {
+            viewCharacters(data2[i]);
+            console.log(data2[i]);
+        }
+    }
+}
+
+export async function getRavenclaw() {
+    var request = await fetch(URLRavenclaw);
+    var data = await request.json();
+    ravenclawCharacters.push(data);
+    console.log(ravenclawCharacters);
+    for (var i = 0; i < 25; i++) {
+        var request2 = await fetch(URL);
+        var data2 = await request2.json();
+        if (ravenclawCharacters[0][i].id == data2[i].id) {
+            viewCharacters(data2[i]);
+            console.log(data2[i]);
+        }
+    }
+}
+
+export async function getHufflepuff() {
+    var request = await fetch(URLHufflepuff);
+    var data = await request.json();
+    hufflepuffCharacters.push(data);
+    console.log(hufflepuffCharacters);
+    for (var i = 0; i < 25; i++) {
+        var request2 = await fetch(URL);
+        var data2 = await request2.json();
+        if (hufflepuffCharacters[0][i].id == data2[i].id) {
+            viewCharacters(data2[i]);
+            console.log(data2[i]);
+        }
+    }
+}
 
 var especies = {
     "human": "Humano",
@@ -43,6 +121,7 @@ function getAncestry(data) {
     ancestro.classList.add("ancestro");
 
     ancestro.innerHTML = ancestros[data.ancestry];
+    ancestro.style.marginTop = "-5%";
 
     return ancestro;
 }
@@ -110,17 +189,9 @@ function getPatronus(data) {
     patron.classList.add("patronus");
 
     patron.innerHTML = `Su Patronus es: ${patronus[data.patronus]}`;
+    patron.style.marginTop = "-3%";
 
     return patron;
-}
-
-export async function getHpCharacters() {
-    for (var i = 0; i < 25; i++) {
-        var request = await fetch(URL);
-        var data = await request.json();
-        viewCharacters(data[i]);
-		console.log(data[i]);
-	}
 }
 
 async function viewCharacters(data) {
@@ -148,8 +219,33 @@ async function viewCharacters(data) {
     female.src = "./images/shemale.png";
     female.style.width = "15px";
     female.style.height = "15px";
+    var wizardHat = document.createElement("div");
+    wizardHat.style.display = "flex";
+    wizardHat.style.justifyContent = "center";
+    var hat = document.createElement("div");
+    hat.style.paddingLeft = "1rem";
+    hat.style.marginTop = "-6%";
+    var isWizardhatImage = document.createElement("img");
+    isWizardhatImage.src = "./images/hat.png";
+    isWizardhatImage.style.width = "20px";
+    isWizardhatImage.style.height = "20px";
+    var isNotWizardhatImage = document.createElement("img");
+    isNotWizardhatImage.src = "./images/hatcross.png";
+    isNotWizardhatImage.style.width = "20px";
+    isNotWizardhatImage.style.height = "20px";
+    var ancestryBlood = document.createElement("div");
+    ancestryBlood.style.display = "flex";
+    ancestryBlood.style.justifyContent = "center";
+    var bloodImage = document.createElement("div");
+    bloodImage.style.marginTop = "-5.5%";
+    bloodImage.style.paddingLeft = "1rem";
+    var blood = document.createElement("img");
+    blood.src = "./images/blood.png";
+    blood.style.width = "10px";
+    blood.style.height = "15px";
     var wand = document.createElement("div");
     wand.style.textAlign = "justify";
+    wand.style.marginTop = "-5%";
     var p = document.createElement("p");
     p.innerHTML = "- Varita:";
     p.style.textDecoration = "underline";
@@ -180,45 +276,33 @@ async function viewCharacters(data) {
     if (data.gender === "female") {
         gender.appendChild(female);
         tarjet.addEventListener("mouseover", () => {
-            tarjet.style.textShadow = "0px 0px 10px rgb(226, 44, 155)";
-            tarjet.style.boxShadow = "0 2px 50px rgb(226, 44, 155)";
-            image.style.boxShadow = "0 2px 10px rgb(226, 44, 155)";
-            //tarjet.style.boxShadow = "0 2px 50px white";
-            //image.style.boxShadow = "0 2px 10px white";
-            //tarjet.style.color = "rgb(226, 44, 155)";
-            //tarjet.style.border = "2px solid rgb(226, 44, 155)";
-            //image.style.border = "2px solid rgb(226, 44, 155)";
+            tarjet.style.textShadow = "0px 0px 20px rgb(226, 44, 155)";
+            tarjet.style.boxShadow = "0 2px 73px rgb(226, 44, 155)";
+            image.style.boxShadow = "0 2px 20px rgb(226, 44, 155)";
+            name.style.color = "rgb(226, 44, 155)";
             
         });
         tarjet.addEventListener("mouseleave", () => {
             tarjet.style.textShadow = "none";
             tarjet.style.boxShadow = "none";
             image.style.boxShadow = "none";
-
+            name.style.color = "white";
             tarjet.style.color = "white";
-            tarjet.style.border = "2px solid white";
-            image.style.border = "2px solid white";
         });
     } else if (data.gender === "male") {
         gender.appendChild(male);
         tarjet.addEventListener("mouseover", () => {
-            tarjet.style.textShadow = "0px 0px 10px rgb(81, 151, 226)";
-            tarjet.style.boxShadow = "0 2px 50px rgb(81, 151, 226)";
-            image.style.boxShadow = "0 2px 10px rgb(81, 151, 226)";
-            //tarjet.style.boxShadow = "0 2px 50px white";
-            //image.style.boxShadow = "0 2px 10px white";
-            //tarjet.style.color = "rgb(81, 151, 226)";
-            //tarjet.style.border = "2px solid rgb(81, 151, 226)";
-            //image.style.border = "2px solid rgb(81, 151, 226)";
+            tarjet.style.textShadow = "0px 0px 20px rgb(81, 151, 226)";
+            tarjet.style.boxShadow = "0 2px 73px rgb(81, 151, 226)";
+            image.style.boxShadow = "0 2px 20px rgb(81, 151, 226)";
+            name.style.color = "rgb(81, 151, 226)";
         });
         tarjet.addEventListener("mouseleave", () => {
             tarjet.style.textShadow = "none";
             tarjet.style.boxShadow = "none";
             image.style.boxShadow = "none";
-
+            name.style.color = "white";
             tarjet.style.color = "white";
-            tarjet.style.border = "2px solid white";
-            image.style.border = "2px solid white";
         });
     }
 
@@ -229,9 +313,21 @@ async function viewCharacters(data) {
     tarjet.appendChild(typesAndGender);
     typesAndGender.appendChild(getSpecies(data));
     typesAndGender.appendChild(gender);
-    tarjet.appendChild(getWizard(data));
+    tarjet.appendChild(wizardHat);
+    wizardHat.appendChild(getWizard(data));
+    if (data.wizard != false) {
+        wizardHat.appendChild(hat);
+        hat.appendChild(isWizardhatImage);
+    }
+    else {
+        wizardHat.appendChild(hat);
+        hat.appendChild(isNotWizardhatImage);
+    }
     if (data.ancestry != "") {
-        tarjet.appendChild(getAncestry(data));
+        tarjet.appendChild(ancestryBlood);
+        ancestryBlood.appendChild(getAncestry(data));
+        ancestryBlood.appendChild(bloodImage);
+        bloodImage.appendChild(blood);
     }
     if (data.wand.wood != "" && data.wand.core != "" && data.wand.length != null) {
         tarjet.appendChild(wand);

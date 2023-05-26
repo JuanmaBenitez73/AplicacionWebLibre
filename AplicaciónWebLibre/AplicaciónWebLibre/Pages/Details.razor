@@ -10,8 +10,19 @@
 			<a href=""><img width="400px" src="./images/hp.png" /></a>
 		</div>
 		<div id="all">
+			<div id="bar" style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 4rem;">
+				@*<div id="search-container">
+					<input type="text" id="search-input" placeholder="Buscar pokemon...">
+				</div>*@
+			</div>
 			<div id="container">
 			</div>
+			<br />
+			<br />
+			
+		</div>
+		<div style="display: flex; justify-content: center;">
+			<iframe width="500px" height="300px" src="./video/Harry Potter y la Cámara Secreta- Dobby es libre.mp4"></iframe>
 		</div>
 		<div style="display: flex; justify-content: center; margin-top: 7rem; padding-top: 1rem; padding-bottom: 1rem; color: white; background-color: rgb(50, 50, 50);">
 			Página sobre muestreo de datos de Harry Potter - Información obtenida de la API oficial de Harry Potter: <a href="https://hp-api.onrender.com/api/characters" style="text-decoration: none; color: white;"><b>https://hp-api.onrender.com/api/characters</b></a>
@@ -31,4 +42,8 @@
 	}
 
 	private async Task GetHpCharacters() => await module.InvokeVoidAsync("getHpCharacters");
+	private async Task GetGryffindor() => await module.InvokeVoidAsync("getGryffindor");
+	private async Task GetSlytherine() => await module.InvokeVoidAsync("getSlytherine");
+	private async Task GetRavenclaw() => await module.InvokeVoidAsync("getRavenclaw");
+	private async Task GetHufflepuff() => await module.InvokeVoidAsync("getHufflepuff");
 }
