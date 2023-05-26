@@ -38,7 +38,6 @@ h1 {
     transition: transform 0.7s ease;
     font-family: Cool;
     font-weight: 700;
-    text-shadow: 0px 0px 7px #5197e2;
 }
 
     .character:hover {
