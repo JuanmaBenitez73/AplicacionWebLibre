@@ -4,17 +4,9 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-body{
-    background-color: rgb(18, 18, 18);
-}
-
 #image {
     display: flex;
     justify-content: center;
-}
-
-button{
-    margin: auto;
 }
 
 h1:focus {
