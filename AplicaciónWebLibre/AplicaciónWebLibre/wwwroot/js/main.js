@@ -180,14 +180,14 @@ async function viewCharacters(data) {
     if (data.gender === "female") {
         gender.appendChild(female);
         tarjet.addEventListener("mouseover", () => {
-            /*tarjet.style.textShadow = "0px 0px 10px rgb(226, 44, 155)";
+            tarjet.style.textShadow = "0px 0px 10px rgb(226, 44, 155)";
             tarjet.style.boxShadow = "0 2px 50px rgb(226, 44, 155)";
-            image.style.boxShadow = "0 2px 10px rgb(226, 44, 155)";*/
-            tarjet.style.boxShadow = "0 2px 50px white";
-            image.style.boxShadow = "0 2px 10px white";
-            tarjet.style.color = "rgb(226, 44, 155)";
-            tarjet.style.border = "2px solid rgb(226, 44, 155)";
-            image.style.border = "2px solid rgb(226, 44, 155)";
+            image.style.boxShadow = "0 2px 10px rgb(226, 44, 155)";
+            //tarjet.style.boxShadow = "0 2px 50px white";
+            //image.style.boxShadow = "0 2px 10px white";
+            //tarjet.style.color = "rgb(226, 44, 155)";
+            //tarjet.style.border = "2px solid rgb(226, 44, 155)";
+            //image.style.border = "2px solid rgb(226, 44, 155)";
             
         });
         tarjet.addEventListener("mouseleave", () => {
@@ -202,14 +202,14 @@ async function viewCharacters(data) {
     } else if (data.gender === "male") {
         gender.appendChild(male);
         tarjet.addEventListener("mouseover", () => {
-            /*tarjet.style.textShadow = "0px 0px 10px rgb(81, 151, 226)";
+            tarjet.style.textShadow = "0px 0px 10px rgb(81, 151, 226)";
             tarjet.style.boxShadow = "0 2px 50px rgb(81, 151, 226)";
-            image.style.boxShadow = "0 2px 10px rgb(81, 151, 226)";*/
-            tarjet.style.boxShadow = "0 2px 50px white";
-            image.style.boxShadow = "0 2px 10px white";
-            tarjet.style.color = "rgb(81, 151, 226)";
-            tarjet.style.border = "2px solid rgb(81, 151, 226)";
-            image.style.border = "2px solid rgb(81, 151, 226)";
+            image.style.boxShadow = "0 2px 10px rgb(81, 151, 226)";
+            //tarjet.style.boxShadow = "0 2px 50px white";
+            //image.style.boxShadow = "0 2px 10px white";
+            //tarjet.style.color = "rgb(81, 151, 226)";
+            //tarjet.style.border = "2px solid rgb(81, 151, 226)";
+            //image.style.border = "2px solid rgb(81, 151, 226)";
         });
         tarjet.addEventListener("mouseleave", () => {
             tarjet.style.textShadow = "none";
