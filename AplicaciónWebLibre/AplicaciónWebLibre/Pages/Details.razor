@@ -11,9 +11,13 @@
 		</div>
 		<div id="all">
 			<div id="bar" style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 4rem;">
-				@*<div id="search-container">
-					<input type="text" id="search-input" placeholder="Buscar pokemon...">
-				</div>*@
+				<div>
+					<input type="text" id="searchInput" placeholder="Buscar por nombre" oninput="searchCharacters()">
+				</div>
+				<div>
+					<button @onclick="() => SortCharacters('a')">Ascendente</button>
+					<button @onclick="() => SortCharacters('d')">Descendente</button>
+				</div>
 			</div>
 			<div id="container">
 			</div>
@@ -45,8 +49,11 @@
 	}
 
 	private async Task GetHpCharacters() => await module.InvokeVoidAsync("getHpCharacters");
+
 	private async Task GetGryffindor() => await module.InvokeVoidAsync("getGryffindor");
 	private async Task GetSlytherine() => await module.InvokeVoidAsync("getSlytherine");
 	private async Task GetRavenclaw() => await module.InvokeVoidAsync("getRavenclaw");
 	private async Task GetHufflepuff() => await module.InvokeVoidAsync("getHufflepuff");
+
+	private async Task SortCharacters(char order) => await module.InvokeVoidAsync("sortCharacters", order);
 }

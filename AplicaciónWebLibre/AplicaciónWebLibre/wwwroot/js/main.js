@@ -4,6 +4,7 @@ var URLSlytherine = "https://hp-api.onrender.com/api/characters/house/slytherine
 var URLRavenclaw = "https://hp-api.onrender.com/api/characters/house/ravenclaw";
 var URLHufflepuff = "https://hp-api.onrender.com/api/characters/house/hufflepuff";
 
+var arrayCharacters = [];
 var gryffindorCharacters = [];
 var slytherineCharacters = [];
 var ravenclawCharacters = [];
@@ -13,6 +14,7 @@ export async function getHpCharacters() {
     for (var i = 0; i < 25; i++) {
         var request = await fetch(URL);
         var data = await request.json();
+        arrayCharacters.push(data[i]);
         viewCharacters(data[i]);
         console.log(data[i]);
     }
@@ -259,13 +261,11 @@ async function viewCharacters(data) {
 
     name.innerHTML = data.name;
     image.src = data.image;
-    actor.innerHTML = "Actor/Actriz: " + data.actor;
-
-    wood.innerHTML = "Madera: " + data.wand.wood;
-    core.innerHTML = "Nucleo: " + data.wand.core;
+    actor.innerHTML = `Actor/Actriz: ${data.actor}`;
+    wood.innerHTML = `Madera: ${data.wand.wood}`;
+    core.innerHTML = `Nucleo: ${data.wand.core}`;
     length.innerHTML = `Longitud: ${Number((data.wand.length * 2.54).toFixed(2))} cm`;
-    patronus.innerHTML = "Patronus: " + data.patronus;
-
+    patronus.innerHTML = `Patronus: ${data.patronus}`;
 
     if (data.hogwartsStaff) {
         info.innerHTML = "Puesto en Hogwarts: Trabajador";
@@ -315,6 +315,7 @@ async function viewCharacters(data) {
     typesAndGender.appendChild(gender);
     tarjet.appendChild(wizardHat);
     wizardHat.appendChild(getWizard(data));
+
     if (data.wizard != false) {
         wizardHat.appendChild(hat);
         hat.appendChild(isWizardhatImage);
@@ -376,6 +377,43 @@ async function viewCharacters(data) {
     if (data.patronus != "") {
         tarjet.appendChild(getPatronus(data));
     }
+
     tarjet.appendChild(info);
     tarjet.appendChild(actor);
+}
+
+export function sortCharacters(order) {
+    var sortedCharacters = "";
+
+    if (order == 'a') {
+        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
+            var nameA = a.name.toLowerCase();
+            var nameB = b.name.toLowerCase();
+            var result = 0;
+
+            if (nameA < nameB) {
+                result = -1;
+            }
+            if (nameA > nameB) {
+                result = 1;
+            }
+            return result;
+        });
+    }
+    else if (order == 'd') {
+        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
+            var nameA = a.name.toLowerCase();
+            var nameB = b.name.toLowerCase();
+            var result = 0;
+
+            if (nameA < nameB) {
+                result = 1;
+            }
+            if (nameA > nameB) {
+                result = -1;
+            }
+            return result;
+        });
+    }
+    viewCharacters(sortedCharacters);
 }
