@@ -22,6 +22,26 @@ h1 {
     grid-template-columns: repeat(3, 1fr);
 }
 
+#gryffindor {
+    filter: drop-shadow(0 0 15px red);
+}
+
+#slytherin {
+    filter: drop-shadow(0 0 15px green);
+}
+
+#ravenclaw {
+    filter: drop-shadow(0 0 15px blue);
+}
+
+#hufflepuff {
+    filter: drop-shadow(0 0 15px yellow);
+}
+
+.resalt {
+    filter: drop-shadow(0 0 10px rgb(210, 80, 255));
+}
+
 .character {
     border-radius: 10px;
     box-shadow: 0 2px 33px black;

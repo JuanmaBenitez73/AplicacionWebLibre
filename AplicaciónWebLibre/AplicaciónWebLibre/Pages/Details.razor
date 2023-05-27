@@ -10,9 +10,9 @@
 			<a href=""><img width="400px" src="./images/hp.png" /></a>
 		</div>
 		<div id="all2">
-			<div style="display: flex; justify-content: center;">
-				<img width="200px" src="./images/Hogwarts.png" />
-			</div>
+
+		</div>
+		<div>
 			<div id="bar" style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 2rem; margin-top: 2rem;">
 				<div style="padding: 15px; border-radius: 10px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 20px -5px white;">
 					<table>
@@ -22,10 +22,10 @@
 									<input style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;" type="text" id="searchInput" placeholder="Buscar por nombre" @onkeyup="SearchCharacters">
 								</td>
 								<td>
-									<button style="margin-left: 20rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha2.png" /></button>
+									<button disabled="@IsFirstPage" @onclick="Return" style="margin-left: 20rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha2.png" /></button>
 								</td>
 								<td>
-									<button style="margin-right: 10rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha.png" /></button>
+									<button disabled="@IsLastPage" @onclick="Advanced" style="margin-right: 10rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha.png" /></button>
 								</td>
 								<td>
 									<button @onclick="() => SortCharacters('a')" style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;">Ordenar Ascendente</button>
@@ -56,17 +56,70 @@
 @code {
 	private IJSInProcessObjectReference module;
 
+	int numShield = 1;
+
+	private int CurrentPage = 1;
+	private int TotalPages = 5;
+
+	private bool IsFirstPage => CurrentPage == 1;
+	private bool IsLastPage => CurrentPage == TotalPages;
+
+	public void Advanced()
+	{
+		numShield++;
+		LoadPage(numShield);
+	}
+
+	public void Return()
+	{
+		numShield--;
+		LoadPage(numShield);
+	}
+
+	private async void LoadPage(int page)
+	{
+		CurrentPage = page;
+
+		await ViewHouseShield();
+		switch (CurrentPage)
+		{
+			case 1:
+				await GetHpCharacters();
+				break;
+			case 2:
+				await GetGryffindor();
+				break;
+			case 3:
+				await GetSlytherin();
+				break;
+			case 4:
+				await GetRavenclaw();
+				break;
+			case 5:
+				await GetHufflepuff();
+				break;
+		}
+	}
+
 	protected override async Task OnInitializedAsync()
 	{
 		await base.OnInitializedAsync();
 
 		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
-		//await ViewHouse();
-		await GetGryffindor();
+
+		await ViewHouseShield();
+		await GetHpCharacters();
+	}
+
+	protected override async Task OnParametersSetAsync()
+	{
+		await base.OnParametersSetAsync();
+
+		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
 	}
 
 	private async Task GetHpCharacters() => await module.InvokeVoidAsync("getHpCharacters");
-	private async Task ViewHouse() => await module.InvokeVoidAsync("viewHouse");
+	private async Task ViewHouseShield() => await module.InvokeVoidAsync("viewHouseShield", numShield);
 
 	private async Task GetGryffindor() => await module.InvokeVoidAsync("getGryffindor");
 	private async Task GetSlytherin() => await module.InvokeVoidAsync("getSlytherin");

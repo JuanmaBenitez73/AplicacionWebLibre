@@ -11,6 +11,8 @@ var ravenclawCharacters = [];
 var hufflepuffCharacters = [];
 
 export async function getHpCharacters() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
     for (var i = 0; i < 25; i++) {
         var request = await fetch(URL);
         var data = await request.json();
@@ -22,17 +24,19 @@ export async function getHpCharacters() {
 export async function getGryffindor() {
     var container = document.getElementById("container");
     container.innerHTML = "";
-    var request = await fetch(URLGryffindor);
+    var request = await fetch(URL);
     var data = await request.json();
-    gryffindorCharacters.push(data);
-    console.log(gryffindorCharacters);
+    arrayCharacters.push(data);
+    //console.log(arrayCharacters);
     for (var i = 0; i < 25; i++) {
-        var request2 = await fetch(URL);
+        var request2 = await fetch(URLGryffindor);
         var data2 = await request2.json();
-        for (var j = 0; j < 25; j++) {
-            if (gryffindorCharacters[0][i].id == data2[j].id) {
-                console.log(data2[j]);
-                viewCharacters(data2[j]);
+        gryffindorCharacters.push(data2);
+        //console.log(gryffindorCharacters[0]);
+        for (var j = 0; j < gryffindorCharacters[0].length; j++) {
+            if (arrayCharacters[i].id == gryffindorCharacters[0][j].id) {
+                //console.log(gryffindorCharacters[0][j]);
+                viewCharacters(gryffindorCharacters[0][j]);
             }
         }
     }
@@ -41,17 +45,19 @@ export async function getGryffindor() {
 export async function getSlytherin() {
     var container = document.getElementById("container");
     container.innerHTML = "";
-    var request = await fetch(URLSlytherin);
+    var request = await fetch(URL);
     var data = await request.json();
-    slytherinCharacters.push(data);
-    console.log(slytherinCharacters);
+    arrayCharacters.push(data);
+    //console.log(arrayCharacters);
     for (var i = 0; i < 25; i++) {
-        var request2 = await fetch(URL);
+        var request2 = await fetch(URLSlytherin);
         var data2 = await request2.json();
-        for (var j = 0; j < 25; j++) {
-            if (slytherinCharacters[0][i].id == data2[j].id) {
-                console.log(data2[j]);
-                viewCharacters(data2[j]);
+        slytherinCharacters.push(data2);
+        //console.log(slytherinCharacters[0]);
+        for (var j = 0; j < slytherinCharacters[0].length; j++) {
+            if (arrayCharacters[i].id == slytherinCharacters[0][j].id) {
+                //console.log(slytherinCharacters[0][j]);
+                viewCharacters(slytherinCharacters[0][j]);
             }
         }
     }
@@ -60,17 +66,19 @@ export async function getSlytherin() {
 export async function getRavenclaw() {
     var container = document.getElementById("container");
     container.innerHTML = "";
-    var request = await fetch(URLRavenclaw);
+    var request = await fetch(URL);
     var data = await request.json();
-    ravenclawCharacters.push(data);
-    console.log(ravenclawCharacters);
+    arrayCharacters.push(data);
+    //console.log(arrayCharacters);
     for (var i = 0; i < 25; i++) {
-        var request2 = await fetch(URL);
+        var request2 = await fetch(URLRavenclaw);
         var data2 = await request2.json();
-        for (var j = 0; j < 25; j++) {
-            if (ravenclawCharacters[0][i].id == data2[j].id) {
-                console.log(data2[j]);
-                viewCharacters(data2[j]);
+        ravenclawCharacters.push(data2);
+        //console.log(ravenclawCharacters[0]);
+        for (var j = 0; j < ravenclawCharacters[0].length; j++) {
+            if (arrayCharacters[i].id == ravenclawCharacters[0][j].id) {
+                //console.log(ravenclawCharacters[0][j]);
+                viewCharacters(ravenclawCharacters[0][j]);
             }
         }
     }
@@ -79,17 +87,19 @@ export async function getRavenclaw() {
 export async function getHufflepuff() {
     var container = document.getElementById("container");
     container.innerHTML = "";
-    var request = await fetch(URLHufflepuff);
+    var request = await fetch(URL);
     var data = await request.json();
-    hufflepuffCharacters.push(data);
-    console.log(hufflepuffCharacters);
+    arrayCharacters.push(data);
+    //console.log(arrayCharacters);
     for (var i = 0; i < 25; i++) {
-        var request2 = await fetch(URL);
+        var request2 = await fetch(URLHufflepuff);
         var data2 = await request2.json();
-        for (var j = 0; j < 25; j++) {
-            if (hufflepuffCharacters[0][i].id == data2[j].id) {
-                console.log(data2[j]);
-                viewCharacters(data2[j]);
+        hufflepuffCharacters.push(data2);
+        //console.log(hufflepuffCharacters[0]);
+        for (var j = 0; j < hufflepuffCharacters[0].length; j++) {
+            if (arrayCharacters[i].id == hufflepuffCharacters[0][j].id) {
+                //console.log(hufflepuffCharacters[0][j]);
+                viewCharacters(hufflepuffCharacters[0][j]);
             }
         }
     }
@@ -211,18 +221,28 @@ function getPatronus(data) {
     return patron;
 }
 
-//export async function viewHouse(){
-//    var all = document.getElementById("all2");
-//    var div1 = document.createElement("div");
-//    div1.style.display = "flex";
-//    div1.style.justifyContent = "center";
-//    var img1 = document.createElement("img");
-//    img1.width = "200px";
-//    img1.src = "./images/Hogwarts.png";
+var housesShields = [
+    "./images/Hogwarts.png",
+    "./images/Gryffindor.png",
+    "./images/Slytherin.png",
+    "./images/Ravenclaw.png",
+    "./images/Hufflepuff.png"
+];
 
-//    all.appendChild(div1);
-//    div1.appendChild(img1);
-//}
+export async function viewHouseShield(num){
+    var all = document.getElementById("all2");
+    all2.innerHTML = "";
+    var div1 = document.createElement("div");
+    div1.style.display = "flex";
+    div1.style.justifyContent = "center";
+    var img1 = document.createElement("img");
+    img1.width = 200;
+    img1.src = housesShields[num - 1];
+    img1.style.filter = "drop-shadow(0 0 15px white)";
+    
+    div1.appendChild(img1);
+    all.appendChild(div1);
+}
 
 async function viewCharacters(data) {
     var container = document.getElementById("container");
@@ -441,12 +461,21 @@ async function viewCharacters(data) {
 //    viewCharacters(sortedCharacters);
 //}
 
-//export async function searchCharacters() {
-//    var search = document.getElementById("searchInput");
-//    var searchValue = search.value;
+export async function searchCharacters() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
 
-//    var filteredCharacters = arrayCharacters.filter((character) => {
-//        return character.name.toLowerCase().includes(searchValue.toLowerCase());
-//    });
-//    viewCharacters(filteredCharacters);
-//}
+    var search = document.getElementById("searchInput");
+    var searchValue = search.value;
+
+    var filteredCharacters = [];
+
+    for (var i = 0; i < arrayCharacters.length; i++) {
+        if (arrayCharacters[i].name.toLowerCase().includes(searchValue.toLowerCase())) {
+            filteredCharacters.push(arrayCharacters[i]);
+        }
+    }
+    for (var i = 0; i < filteredCharacters.length; i++) {
+        await viewCharacters(filteredCharacters[i]);
+    }
+}
