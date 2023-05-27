@@ -1,12 +1,12 @@
 ﻿var URL = "https://hp-api.onrender.com/api/characters";
 var URLGryffindor = "https://hp-api.onrender.com/api/characters/house/gryffindor";
-var URLSlytherine = "https://hp-api.onrender.com/api/characters/house/slytherine";
+var URLSlytherin = "https://hp-api.onrender.com/api/characters/house/slytherin";
 var URLRavenclaw = "https://hp-api.onrender.com/api/characters/house/ravenclaw";
 var URLHufflepuff = "https://hp-api.onrender.com/api/characters/house/hufflepuff";
 
 var arrayCharacters = [];
 var gryffindorCharacters = [];
-var slytherineCharacters = [];
+var slytherinCharacters = [];
 var ravenclawCharacters = [];
 var hufflepuffCharacters = [];
 
@@ -20,6 +20,8 @@ export async function getHpCharacters() {
 }
 
 export async function getGryffindor() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
     var request = await fetch(URLGryffindor);
     var data = await request.json();
     gryffindorCharacters.push(data);
@@ -27,27 +29,37 @@ export async function getGryffindor() {
     for (var i = 0; i < 25; i++) {
         var request2 = await fetch(URL);
         var data2 = await request2.json();
-        if (gryffindorCharacters[0][i].id == data2[i].id) {
-            viewCharacters(data2[i]);
+        for (var j = 0; j < 25; j++) {
+            if (gryffindorCharacters[0][i].id == data2[j].id) {
+                console.log(data2[j]);
+                viewCharacters(data2[j]);
+            }
         }
     }
 }
 
-export async function getSlytherine() {
-    var request = await fetch(URLSlytherine);
+export async function getSlytherin() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
+    var request = await fetch(URLSlytherin);
     var data = await request.json();
-    slytherineCharacters.push(data);
-    console.log(slytherineCharacters);
+    slytherinCharacters.push(data);
+    console.log(slytherinCharacters);
     for (var i = 0; i < 25; i++) {
         var request2 = await fetch(URL);
         var data2 = await request2.json();
-        if (slytherineCharacters[0][i].id == data2[i].id) {
-            viewCharacters(data2[i]);
+        for (var j = 0; j < 25; j++) {
+            if (slytherinCharacters[0][i].id == data2[j].id) {
+                console.log(data2[j]);
+                viewCharacters(data2[j]);
+            }
         }
     }
 }
 
 export async function getRavenclaw() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
     var request = await fetch(URLRavenclaw);
     var data = await request.json();
     ravenclawCharacters.push(data);
@@ -55,13 +67,18 @@ export async function getRavenclaw() {
     for (var i = 0; i < 25; i++) {
         var request2 = await fetch(URL);
         var data2 = await request2.json();
-        if (ravenclawCharacters[0][i].id == data2[i].id) {
-            viewCharacters(data2[i]);
+        for (var j = 0; j < 25; j++) {
+            if (ravenclawCharacters[0][i].id == data2[j].id) {
+                console.log(data2[j]);
+                viewCharacters(data2[j]);
+            }
         }
     }
 }
 
 export async function getHufflepuff() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
     var request = await fetch(URLHufflepuff);
     var data = await request.json();
     hufflepuffCharacters.push(data);
@@ -69,8 +86,11 @@ export async function getHufflepuff() {
     for (var i = 0; i < 25; i++) {
         var request2 = await fetch(URL);
         var data2 = await request2.json();
-        if (hufflepuffCharacters[0][i].id == data2[i].id) {
-            viewCharacters(data2[i]);
+        for (var j = 0; j < 25; j++) {
+            if (hufflepuffCharacters[0][i].id == data2[j].id) {
+                console.log(data2[j]);
+                viewCharacters(data2[j]);
+            }
         }
     }
 }
@@ -206,7 +226,7 @@ function getPatronus(data) {
 
 async function viewCharacters(data) {
     var container = document.getElementById("container");
-    
+
     var tarjet = document.createElement("div");
     tarjet.classList.add("character");
     var hr = document.createElement("hr");
