@@ -9,21 +9,37 @@
 		<div id="image">
 			<a href=""><img width="400px" src="./images/hp.png" /></a>
 		</div>
-		<div id="all">
-			<div id="bar" style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 4rem;">
-				<div>
-					<input type="text" id="searchInput" placeholder="Buscar por nombre" oninput="searchCharacters()">
-				</div>
-				<div>
-					<button @onclick="() => SortCharacters('a')">Ascendente</button>
-					<button @onclick="() => SortCharacters('d')">Descendente</button>
+		<div id="all2">
+			<div style="display: flex; justify-content: center;">
+				<img width="200px" src="./images/Hogwarts.png" />
+			</div>
+			<div id="bar" style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 2rem; margin-top: 2rem;">
+				<div style="padding: 15px; border-radius: 10px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 20px -5px white;">
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									<input style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;" type="text" id="searchInput" placeholder="Buscar por nombre" @onkeyup="SearchCharacters">
+								</td>
+								<td>
+									<button style="margin-left: 20rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha2.png" /></button>
+								</td>
+								<td>
+									<button style="margin-right: 10rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha.png" /></button>
+								</td>
+								<td>
+									<button @onclick="() => SortCharacters('a')" style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;">Ordenar Ascendente</button>
+									<button @onclick="() => SortCharacters('d')" style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;">Ordenar Descendente</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 			<div id="container">
 			</div>
 			<br />
 			<br />
-			
 		</div>
 		<div style="display: flex; justify-content: center;">
 			<iframe width="500px" height="300px" src="./video/Harry Potter y la Cámara Secreta- Dobby es libre.mp4"></iframe>
@@ -45,10 +61,12 @@
 		await base.OnInitializedAsync();
 
 		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
-		GetHpCharacters();
+		//await ViewHouse();
+		await GetHpCharacters();
 	}
 
 	private async Task GetHpCharacters() => await module.InvokeVoidAsync("getHpCharacters");
+	private async Task ViewHouse() => await module.InvokeVoidAsync("viewHouse");
 
 	private async Task GetGryffindor() => await module.InvokeVoidAsync("getGryffindor");
 	private async Task GetSlytherine() => await module.InvokeVoidAsync("getSlytherine");
@@ -56,4 +74,5 @@
 	private async Task GetHufflepuff() => await module.InvokeVoidAsync("getHufflepuff");
 
 	private async Task SortCharacters(char order) => await module.InvokeVoidAsync("sortCharacters", order);
+	private async Task SearchCharacters() => await module.InvokeVoidAsync("searchCharacters");
 }

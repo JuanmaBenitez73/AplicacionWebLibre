@@ -16,7 +16,6 @@ export async function getHpCharacters() {
         var data = await request.json();
         arrayCharacters.push(data[i]);
         viewCharacters(data[i]);
-        console.log(data[i]);
     }
 }
 
@@ -30,7 +29,6 @@ export async function getGryffindor() {
         var data2 = await request2.json();
         if (gryffindorCharacters[0][i].id == data2[i].id) {
             viewCharacters(data2[i]);
-            console.log(data2[i]);
         }
     }
 }
@@ -45,7 +43,6 @@ export async function getSlytherine() {
         var data2 = await request2.json();
         if (slytherineCharacters[0][i].id == data2[i].id) {
             viewCharacters(data2[i]);
-            console.log(data2[i]);
         }
     }
 }
@@ -60,7 +57,6 @@ export async function getRavenclaw() {
         var data2 = await request2.json();
         if (ravenclawCharacters[0][i].id == data2[i].id) {
             viewCharacters(data2[i]);
-            console.log(data2[i]);
         }
     }
 }
@@ -75,7 +71,6 @@ export async function getHufflepuff() {
         var data2 = await request2.json();
         if (hufflepuffCharacters[0][i].id == data2[i].id) {
             viewCharacters(data2[i]);
-            console.log(data2[i]);
         }
     }
 }
@@ -196,6 +191,19 @@ function getPatronus(data) {
     return patron;
 }
 
+//export async function viewHouse(){
+//    var all = document.getElementById("all2");
+//    var div1 = document.createElement("div");
+//    div1.style.display = "flex";
+//    div1.style.justifyContent = "center";
+//    var img1 = document.createElement("img");
+//    img1.width = "200px";
+//    img1.src = "./images/Hogwarts.png";
+
+//    all.appendChild(div1);
+//    div1.appendChild(img1);
+//}
+
 async function viewCharacters(data) {
     var container = document.getElementById("container");
     
@@ -252,19 +260,14 @@ async function viewCharacters(data) {
     p.innerHTML = "- Varita:";
     p.style.textDecoration = "underline";
     var ul = document.createElement("ul");
-    var wood = document.createElement("li");
-    var core = document.createElement("li");
-    var length = document.createElement("li");
-    var patronus = document.createElement("div");
+    var longitud = document.createElement("li");
     var info = document.createElement("div");
     var actor = document.createElement("div");
 
     name.innerHTML = data.name;
     image.src = data.image;
     actor.innerHTML = `Actor/Actriz: ${data.actor}`;
-    wood.innerHTML = `Madera: ${data.wand.wood}`;
-    core.innerHTML = `Nucleo: ${data.wand.core}`;
-    length.innerHTML = `Longitud: ${Number((data.wand.length * 2.54).toFixed(2))} cm`;
+    longitud.innerHTML = `Longitud: ${Number((data.wand.length * 2.54).toFixed(2))} cm`;
     patronus.innerHTML = `Patronus: ${data.patronus}`;
 
     if (data.hogwartsStaff) {
@@ -372,7 +375,7 @@ async function viewCharacters(data) {
         ul.appendChild(getCore(data));
     }
     if (data.wand.length != null) {
-        ul.appendChild(length);
+        ul.appendChild(longitud);
     }
     if (data.patronus != "") {
         tarjet.appendChild(getPatronus(data));
@@ -382,38 +385,48 @@ async function viewCharacters(data) {
     tarjet.appendChild(actor);
 }
 
-export function sortCharacters(order) {
-    var sortedCharacters = "";
+//export function sortCharacters(order) {
+//    var sortedCharacters = "";
 
-    if (order == 'a') {
-        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
-            var nameA = a.name.toLowerCase();
-            var nameB = b.name.toLowerCase();
-            var result = 0;
+//    if (order === 'a') {
+//        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
+//            var nameA = a.name.toLowerCase();
+//            var nameB = b.name.toLowerCase();
+//            var result = 0;
 
-            if (nameA < nameB) {
-                result = -1;
-            }
-            if (nameA > nameB) {
-                result = 1;
-            }
-            return result;
-        });
-    }
-    else if (order == 'd') {
-        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
-            var nameA = a.name.toLowerCase();
-            var nameB = b.name.toLowerCase();
-            var result = 0;
+//            if (nameA < nameB) {
+//                result = -1;
+//            }
+//            if (nameA > nameB) {
+//                result = 1;
+//            }
+//            return result;
+//        });
+//    }
+//    else if (order === 'd') {
+//        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
+//            var nameA = a.name.toLowerCase();
+//            var nameB = b.name.toLowerCase();
+//            var result = 0;
 
-            if (nameA < nameB) {
-                result = 1;
-            }
-            if (nameA > nameB) {
-                result = -1;
-            }
-            return result;
-        });
-    }
-    viewCharacters(sortedCharacters);
-}
+//            if (nameA < nameB) {
+//                result = 1;
+//            }
+//            if (nameA > nameB) {
+//                result = -1;
+//            }
+//            return result;
+//        });
+//    }
+//    viewCharacters(sortedCharacters);
+//}
+
+//export async function searchCharacters() {
+//    var search = document.getElementById("searchInput");
+//    var searchValue = search.value;
+
+//    var filteredCharacters = arrayCharacters.filter((character) => {
+//        return character.name.toLowerCase().includes(searchValue.toLowerCase());
+//    });
+//    viewCharacters(filteredCharacters);
+//}
