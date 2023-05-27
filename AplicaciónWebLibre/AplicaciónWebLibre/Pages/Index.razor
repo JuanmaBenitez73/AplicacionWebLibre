@@ -1,7 +1,10 @@
 ﻿@page "/"
 @using Microsoft.AspNetCore.Components.Web
+@using System.Threading.Tasks
 @using Microsoft.JSInterop;
 @inject IJSRuntime JSRuntime
+@using ChartJs.Blazor.Charts
+@using ChartJs.Blazor.ChartJS.BarChart
 
 <PageTitle>JuanmaAlvarry Potter</PageTitle>
 <body>
@@ -29,7 +32,12 @@
 			<div id="hufflepuff">
 				<img width="70px" src="./images/Hufflepuff.png" />
 			</div>
+		</div>
+		<div style="margin-top: 15%;">
+			<div style="display: flex; justify-content: center; margin: auto; max-width: 600px; max-height: 400px; background-color: rgb(10, 10, 10);">
+				<canvas id="myChart"></canvas>
 			</div>
+		</div>
 		<div style="display: flex; justify-content: center; margin-top: 7rem; padding-top: 1rem; padding-bottom: 1rem; color: white; background-color: rgb(50, 50, 50);">
 			Página sobre muestreo de datos de Harry Potter - Información obtenida de la API oficial de Harry Potter: <a href="https://hp-api.onrender.com/" style="text-decoration: none; color: white;"><b>https://hp-api.onrender.com/</b></a>
 		</div>
@@ -37,5 +45,16 @@
 </body>
 
 @code{
-	
+	private IJSInProcessObjectReference module;
+
+	protected override async Task OnInitializedAsync()
+	{
+		await base.OnInitializedAsync();
+
+		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
+
+		await Graphic();
+	}
+
+	private async Task Graphic() => await module.InvokeVoidAsync("graphic");
 }

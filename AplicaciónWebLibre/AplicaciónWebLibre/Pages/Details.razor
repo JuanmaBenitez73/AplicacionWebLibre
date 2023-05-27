@@ -117,13 +117,6 @@
 		await GetHpCharacters();
 	}
 
-	protected override async Task OnParametersSetAsync()
-	{
-		await base.OnParametersSetAsync();
-
-		module = await JSRuntime.InvokeAsync<IJSInProcessObjectReference>("import", "./js/main.js");
-	}
-
 	private async Task GetHpCharacters() => await module.InvokeVoidAsync("getHpCharacters");
 	private async Task ViewHouseShield() => await module.InvokeVoidAsync("viewHouseShield", numShield);
 

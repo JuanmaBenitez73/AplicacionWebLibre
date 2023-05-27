@@ -491,3 +491,32 @@ export async function searchCharacters() {
         await viewCharacters(filteredCharacters[i]);
     }
 }
+
+export function graphic() {
+    new Chart('myChart', {
+        type: 'bar',
+        data: {
+            labels: ['Gryffindor', 'Slytherin', 'Ravenclaw', 'Hufflepuff'],
+            datasets: [{ label: 'Integrantes', data: [10, 9, 2, 1], backgroundColor: ['rgba(196, 30, 58, 0.8)', 'rgba(0, 109, 57, 0.8)', 'rgba(0, 84, 166, 0.8)', 'rgba(235, 189, 20, 0.8)'], borderColor: 'rgb(255, 255, 255)', borderWidth: 1 }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: 'white'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'white'
+                    }
+                }
+            },
+            plugins: {
+                legend: { labels: { color: 'white' } },
+                title: { display: true, text: 'Gráfico de Casas de Hogwarts', color: 'white' }
+            }
+        }
+    });
+}
