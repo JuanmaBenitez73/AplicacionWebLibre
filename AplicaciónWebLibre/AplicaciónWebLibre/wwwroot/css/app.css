@@ -11,6 +11,7 @@ body {
 #image {
     display: flex;
     justify-content: center;
+    filter: drop-shadow(0 0 10px rgb(0, 0, 0));
 }
 
 h1 {
@@ -44,7 +45,7 @@ h1 {
 
 .character {
     border-radius: 10px;
-    box-shadow: 0 2px 33px black;
+    box-shadow: 0 2px 15px white;
     padding: 20px;
     text-align: center;
     margin-top: 3%;

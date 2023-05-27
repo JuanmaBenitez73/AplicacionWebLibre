@@ -7,7 +7,7 @@
 <body id="details">
 	<div>
 		<div id="image">
-			<a href=""><img width="400px" src="./images/hp.png" /></a>
+			<a href=""><img width="400px" src="./images/hp.png" id="logo" /></a>
 		</div>
 		<div id="all2">
 
@@ -19,17 +19,23 @@
 						<tbody>
 							<tr>
 								<td>
-									<input style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;" type="text" id="searchInput" placeholder="Buscar por nombre" @onkeyup="SearchCharacters">
+									@if (@CurrentPage == 1)
+									{
+										<input style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;" type="text" id="searchInput" placeholder="Buscar por nombre" @onkeyup="SearchCharacters">
+									}
 								</td>
 								<td>
-									<button disabled="@IsFirstPage" @onclick="Return" style="margin-left: 20rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha2.png" /></button>
+									<button disabled="@IsFirstPage" @onclick="Return" style="margin-left: 15rem; margin-right: 10rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha2.png" /></button>
 								</td>
 								<td>
-									<button disabled="@IsLastPage" @onclick="Advanced" style="margin-right: 10rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha.png" /></button>
+									<button disabled="@IsLastPage" @onclick="Advanced" style="margin-right: 5rem; border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; background-color: rgb(10, 10, 10); border: 2px solid white; box-shadow: 0 0 15px -5px white; border-radius: 8px;"><img width="25px" height="25px" src="./images/flecha.png" /></button>
 								</td>
 								<td>
-									<button @onclick="() => SortCharacters('a')" style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;">Ordenar Ascendente</button>
-									<button @onclick="() => SortCharacters('d')" style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;">Ordenar Descendente</button>
+									@if (@CurrentPage == 1)
+									{
+										<button @onclick="SortCharactersAscending" style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;">Ordenar Ascendente</button>
+										<button @onclick="SortCharactersDescending" style="border: 1px solid; padding: 5px; padding-left: 20px; padding-right: 20px; border-radius: 8px;">Ordenar Descendente</button>
+									}
 								</td>
 							</tr>
 						</tbody>
@@ -44,11 +50,11 @@
 		<div style="display: flex; justify-content: center;">
 			<iframe width="500px" height="300px" src="./video/Harry Potter y la Cámara Secreta- Dobby es libre.mp4"></iframe>
 		</div>
-		<div>
+		<div id="graphic">
 			
 		</div>
 		<div style="display: flex; justify-content: center; margin-top: 7rem; padding-top: 1rem; padding-bottom: 1rem; color: white; background-color: rgb(50, 50, 50);">
-			Página sobre muestreo de datos de Harry Potter - Información obtenida de la API oficial de Harry Potter: <a href="https://hp-api.onrender.com/api/characters" style="text-decoration: none; color: white;"><b>https://hp-api.onrender.com/api/characters</b></a>
+			Página sobre muestreo de datos de Harry Potter - Información obtenida de la API oficial de Harry Potter: <a href="https://hp-api.onrender.com/" style="text-decoration: none; color: white;"><b>https://hp-api.onrender.com/</b></a>
 		</div>
 	</div>
 </body>
@@ -126,6 +132,7 @@
 	private async Task GetRavenclaw() => await module.InvokeVoidAsync("getRavenclaw");
 	private async Task GetHufflepuff() => await module.InvokeVoidAsync("getHufflepuff");
 
-	private async Task SortCharacters(char order) => await module.InvokeVoidAsync("sortCharacters", order);
+	private async Task SortCharactersAscending() => await module.InvokeVoidAsync("sortCharactersAscending");
+	private async Task SortCharactersDescending() => await module.InvokeVoidAsync("sortCharactersDescending");
 	private async Task SearchCharacters() => await module.InvokeVoidAsync("searchCharacters");
 }

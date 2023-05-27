@@ -238,7 +238,7 @@ export async function viewHouseShield(num){
     var img1 = document.createElement("img");
     img1.width = 200;
     img1.src = housesShields[num - 1];
-    img1.style.filter = "drop-shadow(0 0 15px white)";
+    img1.style.filter = "drop-shadow(0 0 10px white)";
     
     div1.appendChild(img1);
     all.appendChild(div1);
@@ -425,41 +425,53 @@ async function viewCharacters(data) {
     tarjet.appendChild(actor);
 }
 
-//export function sortCharacters(order) {
-//    var sortedCharacters = "";
+export function sortCharactersAscending() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
 
-//    if (order === 'a') {
-//        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
-//            var nameA = a.name.toLowerCase();
-//            var nameB = b.name.toLowerCase();
-//            var result = 0;
+    var result = 0;
 
-//            if (nameA < nameB) {
-//                result = -1;
-//            }
-//            if (nameA > nameB) {
-//                result = 1;
-//            }
-//            return result;
-//        });
-//    }
-//    else if (order === 'd') {
-//        sortedCharacters = arrayCharacters.slice().sort((a, b) => {
-//            var nameA = a.name.toLowerCase();
-//            var nameB = b.name.toLowerCase();
-//            var result = 0;
+    var sortedCharactersAsc = arrayCharacters.slice().sort((a, b) => {
+        var nameA = a.name.toLowerCase();
+        var nameB = b.name.toLowerCase();
 
-//            if (nameA < nameB) {
-//                result = 1;
-//            }
-//            if (nameA > nameB) {
-//                result = -1;
-//            }
-//            return result;
-//        });
-//    }
-//    viewCharacters(sortedCharacters);
-//}
+        if (nameA < nameB) {
+            result = -1;
+        }
+        if (nameA > nameB) {
+            result = 1;
+        }
+        return result;
+    });
+
+    for (var i = 0; i < sortedCharactersAsc.length; i++) {
+        viewCharacters(sortedCharactersAsc[i]);
+    }
+}
+
+export function sortCharactersDescending() {
+    var container = document.getElementById("container");
+    container.innerHTML = "";
+
+    var result = 0;
+
+    var sortedCharactersDesc = arrayCharacters.slice().sort((a, b) => {
+        var nameA = a.name.toLowerCase();
+        var nameB = b.name.toLowerCase();
+
+        if (nameA > nameB) {
+            result = -1;
+        }
+        if (nameA < nameB) {
+            result = 1;
+        }
+        return result;
+    });
+
+    for (var i = 0; i < sortedCharactersDesc.length; i++) {
+        viewCharacters(sortedCharactersDesc[i]);
+    }
+}
 
 export async function searchCharacters() {
     var container = document.getElementById("container");
